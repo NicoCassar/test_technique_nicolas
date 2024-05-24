@@ -20,8 +20,11 @@ static uint32_t magnet_timestamp_array[MAGNET_NBR] = {0};
 
 float get_pedaling_speed(void)
 {
-    // WRITE YOUR CODE HERE
-    return 0.f;
+    float pedaling_speed = 0.0;
+    /// pedaling_speed = 1min / (magnetNbr * (actualTimestamp - lastTimestamp))
+    pedaling_speed = US_IN_A_MINUTE / (MAGNET_NBR * (magnet_timestamp_array[index] - magnet_timestamp_array[(index + MAGNET_NBR - 1) % MAGNET_NBR]));
+
+    return pedaling_speed;
 }
 
 float get_average_pedaling_speed(void)
