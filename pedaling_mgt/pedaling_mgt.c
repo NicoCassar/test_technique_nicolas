@@ -6,6 +6,15 @@
 
 #include "time_mgt.h"
 
+/**** Defines ****/
+
+#define MAGNET_NBR 12 /// Number of magnets on pedaling sensor (no unit)
+
+/**** Private variables ****/
+
+static uint8_t index = 0;
+static uint32_t magnet_timestamp_array[MAGNET_NBR] = {0};
+
 /**** Public API ****/
 
 float get_pedaling_speed(void)
@@ -22,5 +31,6 @@ float get_average_pedaling_speed(void)
 
 void new_magnet_cb(void)
 {
-    // WRITE YOUR CODE HERE
+    index = (index + 1) % MAGNET_NBR;
+    magnet_timestamp_array[index] = get_timestamp();
 }
